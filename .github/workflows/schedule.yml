@@ -4,7 +4,7 @@ name: Daily Python Script
 on:
   schedule:
     # Runs every day at 5:45 PM Egypt time (2:45 PM UTC)
-    - cron: '01 15 * * *'
+    - cron: '07 16 * * *'
 
 jobs:
   run-script:
