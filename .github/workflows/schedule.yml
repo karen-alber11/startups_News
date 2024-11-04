@@ -1,21 +1,28 @@
 name: Daily Python Script
 
-# Controls when the workflow will run
 on:
-  schedule:
-    # Runs every day at 6:06 PM Egypt time (4:06 PM UTC)
-    - cron: '24 15 * * *'
+  schedule: 
+    # Runs daily at 10 PM Kuwait time (7 PM UTC)
+    - cron: '30 11 * * *'
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
 
     steps:
-    # Checkout the repository
     - name: Check out the code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11.3'
+
+    # Install dependencies, either from requirements.txt or explicitly
+    - name: Install dependencies
+      run: |
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install requests; fi
 
     # Run your script
     - name: Run Python script
-      run: |
-        python main.py
+      run: python main.py
