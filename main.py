@@ -1,4 +1,4 @@
-from NewsScraper import NewsScraper
+# from NewsScraper import NewsScraper
 from PDFGenerator import PDFGenerator
 from EmailSender import EmailSender
 from Scheduler import Scheduler
@@ -6,10 +6,11 @@ from Scheduler import Scheduler
 # Main Function to Orchestrate the Process
 def main():
     # Initialize the scraper
-    scraper = NewsScraper()
+    # scraper = NewsScraper()
 
     # Fetch news articles
-    news_array = scraper.get_startup_news()
+    # news_array = scraper.get_startup_news()
+    news_array = ["Hello Karen!"]
 
     # Generate PDF with the news
     pdf_filename = "tech_news.pdf"  # Define PDF filename
