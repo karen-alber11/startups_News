@@ -37,6 +37,16 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Install dependencies
+      run: |
+        if [ -f requirements.txt ]; then 
+            pip install -r requirements.txt; 
+        else 
+            echo "requirements.txt not found, installing requests only"; 
+            pip install requests; 
+        fi
+        pip show requests  # Debugging line to check installation
+
     # Run your script
     - name: Run Python script
       run: |
