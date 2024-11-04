@@ -1,14 +1,9 @@
-# from NewsScraper import NewsScraper
 from PDFGenerator import PDFGenerator
 from EmailSender import EmailSender
 
 # Main Function to Orchestrate the Process
 def main():
-    # Initialize the scraper
-    # scraper = NewsScraper()
 
-    # Fetch news articles
-    # news_array = scraper.get_startup_news()
     news_array = ["Hello Karen!"]
 
     # Generate PDF with the news
