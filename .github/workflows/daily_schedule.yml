@@ -20,7 +20,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11.3'
+        python-version: '3.11'
 
     # Install dependencies, either from requirements.txt or explicitly
     - name: Install dependencies
