@@ -1,54 +1,37 @@
-name: Daily Python Script
-
-env:
-  ACTIONS_RUNNER_DEBUG: true
-  ACTIONS_STEP_DEBUG: true
+name: Daily Run
 
 on:
   schedule: 
     # Runs daily at 10 PM Kuwait time (7 PM UTC)
-    - cron: '00 19 * * *'  # Adjust this as needed for scheduling
+    - cron: '51 16 * * *'  # Adjust this as needed for scheduling
+
+permissions:
+  contents: read
 
 jobs:
-  run-script:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out the code
-      uses: actions/checkout@v4
+    # Check out the repository
+    - uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    # Set up Python
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v3
       with:
-        python-version: '3.11'
+        python-version: "3.10"
 
-    - name: Cache Python packages
-      uses: actions/cache@v2
-      with:
-        path: venv
-        key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-venv-
-
-    - name: Create and activate virtual environment
-      run: |
-        python -m venv venv
-        source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
+    # Install dependencies from requirements.txt
     - name: Install dependencies
       run: |
-        if [ -f requirements.txt ]; then 
-            pip install -r requirements.txt; 
-        else 
-            echo "requirements.txt not found, installing requests only"; 
-            pip install requests; 
-        fi
-        pip show requests  # Debugging line to check installation
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    # Explicitly install fpdf as a troubleshooting step
+    - name: Install fpdf explicitly
+      run: pip install fpdf
 
-    # Run your script
-    - name: Run Python script
+    # Run the main Python script
+    - name: Run Main
       run: |
-        source venv/bin/activate  # Ensure the virtual environment is activated
         python main.py
