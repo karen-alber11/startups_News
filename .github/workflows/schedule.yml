@@ -25,4 +25,4 @@ jobs:
 
     # Run your script
     - name: Run Python script
-      run: python main.py
+      run: main.py
