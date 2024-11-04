@@ -1,9 +1,13 @@
 name: Daily Python Script
 
+env:
+  ACTIONS_RUNNER_DEBUG: true
+  ACTIONS_STEP_DEBUG: true
+
 on:
   schedule: 
     # Runs daily at 10 PM Kuwait time (7 PM UTC)
-    - cron: '30 11 * * *'
+    - cron: '57 13 * * *'  # Adjust this as needed for scheduling
 
 jobs:
   run-script:
@@ -16,13 +20,25 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11.3'
+        python-version: '3.11'
 
-    # Install dependencies, either from requirements.txt or explicitly
-    - name: Install dependencies
+    - name: Cache Python packages
+      uses: actions/cache@v2
+      with:
+        path: venv
+        key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-venv-
+
+    - name: Create and activate virtual environment
       run: |
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install requests; fi
+        python -m venv venv
+        source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
     # Run your script
     - name: Run Python script
-      run: main.py
+      run: |
+        source venv/bin/activate  # Ensure the virtual environment is activated
+        python main.py
