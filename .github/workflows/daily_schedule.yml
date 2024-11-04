@@ -3,7 +3,7 @@ name: Daily Python Script
 on:
   schedule: 
     # Runs daily at 10 PM Kuwait time (7 PM UTC)
-    - cron: '30 11 * * *'
+    - cron: '00 19 * * *'  # Adjust this as needed for scheduling
 
 jobs:
   run-script:
