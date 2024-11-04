@@ -1,7 +1,6 @@
 # from NewsScraper import NewsScraper
 from PDFGenerator import PDFGenerator
 from EmailSender import EmailSender
-from Scheduler import Scheduler
 
 # Main Function to Orchestrate the Process
 def main():
