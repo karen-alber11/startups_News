@@ -1,10 +1,14 @@
 from PDFGenerator import PDFGenerator
 from EmailSender import EmailSender
+from Web1 import Web1  # Ensure this imports the Web1 class
 
 # Main Function to Orchestrate the Process
 def main():
+    scraper = Web1()  # Create an instance of the Web1 class
+    articles = scraper.scrape_startup_news()  # Fetch the articles from the Web1 class
 
-    news_array = ["Hello Karen!"]
+    # Prepare a list of articles with title and description
+    news_array = [{'title': article['title'], 'description': article['description']} for article in articles]
 
     # Generate PDF with the news
     pdf_filename = "tech_news.pdf"  # Define PDF filename
