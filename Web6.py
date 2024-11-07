@@ -40,19 +40,3 @@ class Web6:
 
         # Return today's articles or an empty list if none match
         return articles_today
-
-
-def main():
-    # Instantiate the Web6 class
-    web6 = Web6()
-
-    # Scrape articles from the specified URL
-    articles = web6.scrape_tech_articles()
-
-    # Print both the article date and today's date for debugging
-    if articles:
-        print("Articles from today:")
-        for article in articles:
-            print(f"Title: {article['title']}, Published Date: {article['date']}")
-    else:
-        print("No articles found for today.")
