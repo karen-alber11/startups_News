@@ -1,4 +1,5 @@
 from termcolor import colored
+from datetime import datetime
 from PDFGenerator import PDFGenerator
 from EmailSender import EmailSender
 from Web1 import Web1
@@ -60,8 +61,12 @@ def main():
     # Combine all articles
     combined_articles = news_array1 + news_array2 + news_array3 + news_array4 + news_array5 + news_array6
 
+    # Get today's date in two different formats
+    today_date_pdf = datetime.now().strftime("%d%m%Y")
+    today_date_subject = datetime.now().strftime("%d-%m-%Y")
+
     # Create the PDF
-    pdf_filename = "tech_news.pdf"  # Define PDF filename
+    pdf_filename = f"tech_news_{today_date_pdf}.pdf"
     pdf_gen = PDFGenerator(filename=pdf_filename)
 
     # Generate PDF with the URL added as text and articles below it
@@ -75,8 +80,10 @@ def main():
         smtp_server="smtp.gmail.com",
         port=587
     )
+
+    subject = f"Daily Tech Startup News {today_date_subject}"
     email_sender.send_email(
-        subject="Daily Tech Startup News",
+        subject=subject,
         body="Please find attached the latest news on tech startups.",
         pdf_filename=pdf_filename
     )

@@ -12,7 +12,7 @@ class Web6:
 
         # Get today's date in the compatible format for comparison
         today_date = datetime.now().strftime("%B %d, %Y")
-        print(f"Today's date: {today_date}")  # Debug print to check today's date
+        # print(f"Today's date: {today_date}")  # Debug print to check today's date
 
         articles_today = []
 
@@ -28,7 +28,7 @@ class Web6:
             if article_date_str:
                 # Convert the article's date to the desired format
                 article_date = datetime.strptime(article_date_str, "%B %d, %Y %I:%M %p").strftime("%B %d, %Y")
-                print(f"Article date: {article_date}")  # Debug print to check article date
+                # print(f"Article date: {article_date}")  # Debug print to check article date
 
                 # Check if the article date matches today's date
                 if article_date == today_date:
