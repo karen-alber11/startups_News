@@ -5,7 +5,8 @@ from Web1 import Web1
 from Web2 import Web2
 from Web3 import Web3
 from Web4 import Web4
-from Web5 import Web5  # Added Web5 import
+from Web5 import Web5
+from Web6 import Web6
 
 # Function to sanitize text by replacing problematic characters
 def sanitize_text(text):
@@ -18,9 +19,10 @@ def main():
     url2 = "https://techfundingnews.com/category/ai/"
     url3 = "https://techcrunch.com/category/startups/"
     url4 = "https://disruptafrica.com/category/startups/"
-    url5 = "https://technode.com/"  # URL for Web5
+    url5 = "https://technode.com/"
+    url6 = "https://venturebeat.com/category/ai/"
 
-    # Create scraper instances for Web1, Web2, Web3, Web4, and Web5
+    # Create scraper instances for Web1, Web2, Web3, Web4, Web5, and Web6
     scraper1 = Web1()
     articles1 = scraper1.scrape_startup_news()
 
@@ -34,7 +36,10 @@ def main():
     articles4 = scraper4.scrape_startup_news()
 
     scraper5 = Web5()  # Instantiate Web5
-    articles5 = scraper5.scrape_startup_news()  # Fetch articles from Web5
+    articles5 = scraper5.scrape_startup_news()
+
+    scraper6 = Web6()  # Instantiate Web6
+    articles6 = scraper6.scrape_startup_news()  # Fetch articles from Web6
 
     # Print the URLs in blue (for debugging purposes)
     print(colored(f"URL1: {url1}", "blue"))
@@ -42,16 +47,18 @@ def main():
     print(colored(f"URL3: {url3}", "blue"))
     print(colored(f"URL4: {url4}", "blue"))
     print(colored(f"URL5: {url5}", "blue"))
+    print(colored(f"URL6: {url6}", "blue"))
 
     # Prepare articles for each web source and sanitize the text
     news_array1 = [{'title': sanitize_text(article['title']), 'description': sanitize_text(article['description']), 'url': url1} for article in articles1]
     news_array2 = [{'title': sanitize_text(article['title']), 'description': sanitize_text(article['description']), 'url': url2} for article in articles2]
     news_array3 = [{'title': sanitize_text(article['title']), 'url': url3} for article in articles3]
     news_array4 = [{'title': sanitize_text(article['title']), 'description': sanitize_text(article['description']), 'url': url4} for article in articles4]
-    news_array5 = [{'title': sanitize_text(article['title']), 'url': url5} for article in articles5]  # Title-only handling for Web5
+    news_array5 = [{'title': sanitize_text(article['title']), 'url': url5} for article in articles5]
+    news_array6 = [{'title': sanitize_text(article['title']), 'url': url6} for article in articles6]
 
     # Combine all articles
-    combined_articles = news_array1 + news_array2 + news_array3 + news_array4 + news_array5
+    combined_articles = news_array1 + news_array2 + news_array3 + news_array4 + news_array5 + news_array6
 
     # Create the PDF
     pdf_filename = "tech_news.pdf"  # Define PDF filename
@@ -63,7 +70,7 @@ def main():
     # Send email with the generated PDF
     email_sender = EmailSender(
         from_email="karenalber11@gmail.com",
-        password="ygwg oajl xwqu hfeo",  # Use your generated app password
+        password="ygwg oajl xwqu hfeo",
         to_email="karenalber.work@gmail.com",
         smtp_server="smtp.gmail.com",
         port=587
