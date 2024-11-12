@@ -48,4 +48,4 @@ class Web2:
                 })
 
         # Return an empty list if no articles are found
-        return articles_today if articles_today else []
+        return articles_today

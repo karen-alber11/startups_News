@@ -24,7 +24,7 @@ class Web3:
             category = category_tag.find('a').text.strip() if category_tag and category_tag.find('a') else None
 
             # Continue only if the category matches "Startups"
-            if category != "Startups":
+            if category not in ("STARTUPS", "AI", "APPS"):
                 continue
 
             # Extract the article's date in ISO format

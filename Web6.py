@@ -1,3 +1,4 @@
+# Web6 = https://venturebeat.com/category/ai/
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime

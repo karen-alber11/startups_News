@@ -1,4 +1,4 @@
-# Web5 = https://inc42.com/buzz/
+# Web5 = https://technode.com/
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -20,7 +20,7 @@ class Web5:
         for article in articles:
             # Extract the title (x) and ensure it exists
             title_tag = article.find('h3', class_='entry-title')
-            title = title_tag.find('a').text.strip() if title_tag and title_tag.find('a') else 'No Title'
+            title = title_tag.find('a').text.strip() if title_tag and title_tag.find('a') else None
 
             # Extract the article's date
             time_tag = article.find('time', class_='entry-date published')
