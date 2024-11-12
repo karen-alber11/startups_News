@@ -7,45 +7,42 @@ class Web2:
 
     def scrape_startup_news(self):
         response = requests.get(self.URL)
+        if response.status_code != 200:
+            return []  # No need to print an error, just return empty list if failure
+
         soup = BeautifulSoup(response.text, 'html.parser')
         articles = soup.find_all('div', class_='cs-entry__outer')
 
-        today_date = datetime.now().date()  # Get today's date
-        today_date_str = today_date.strftime('%B %d, %Y')  # Get today's date in format like 'November 6, 2024'
-        # Strip leading zero from day if exists
-        today_date_str = today_date_str.replace(' 0', ' ')  # Replace ' 0' with space to remove the leading zero
+        today_date = datetime.now()
+        today_date_str = today_date.strftime('%B %d, %Y').replace(" 0", " ")
 
         articles_today = []
 
         for article in articles:
-            # Extract the article date
+            # Extract the article date if available
             date_tag = article.find('div', class_='cs-entry__post-meta')
             if date_tag:
-                article_date_str = date_tag.find('div', class_='cs-meta-date')
-                if article_date_str:
-                    article_date_str = article_date_str.text.strip()
-                else:
-                    continue  # Skip if no date is found
+                date_element = date_tag.find('div', class_='cs-meta-date')
+                article_date_str = date_element.text.strip() if date_element else None
             else:
-                continue  # Skip if no date is found
+                article_date_str = None
 
-            # Compare the article date with today's adjusted date
+            # Only proceed if article date matches today's date
             if article_date_str == today_date_str:
-                # Extract the article details
-                title_tag = article.find('h2', class_='cs-entry__title')
-                title = title_tag.find('a').text.strip() if title_tag else 'No Title'
-                description = article.find('div', class_='cs-entry__excerpt').text.strip() if article.find('div', class_='cs-entry__excerpt') else 'No Description'
+                # Extract title
+                title_tag = article.find('h6', class_='cs-entry__title')
+                title = title_tag.find('a').text.strip() if title_tag and title_tag.find('a') else None
 
-                # Skip articles with "No Title" and "No Description"
-                if title == 'No Title' and description == 'No Description':
-                    continue
+                # Extract description if available
+                description_tag = article.find('div', class_='cs-entry__excerpt')
+                description = description_tag.text.strip() if description_tag else None
 
-                # Append article details to the list
-                articles_today.append({
-                    'title': title,
-                    'description': description,
-                    'date': article_date_str
-                })
+                # Only add articles to the list if title is present
+                if title:
+                    articles_today.append({
+                        'title': title,
+                        'description': description,
+                        'date': article_date_str
+                    })
 
-        # Return an empty list if no articles are found
         return articles_today

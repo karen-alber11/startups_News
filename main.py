@@ -55,10 +55,17 @@ def main():
     print(colored(f"URL6: {url6}", "blue"))
 
     # Prepare articles for each web source and sanitize the text
-    news_array1 = [{'title': sanitize_text(article['title']), 'description': sanitize_text(article['description']), 'url': url1} for article in articles1]
-    news_array2 = [{'title': sanitize_text(article['title']), 'description': sanitize_text(article['description']), 'url': url2} for article in articles2]
+    # Prepare articles for each web source and sanitize the text
+    news_array1 = [
+        {'title': sanitize_text(article['title']), 'description': sanitize_text(article['description'] or ''),
+         'url': url1} for article in articles1]
+    news_array2 = [
+        {'title': sanitize_text(article['title']), 'description': sanitize_text(article['description'] or ''),
+         'url': url2} for article in articles2]
     news_array3 = [{'title': sanitize_text(article['title']), 'url': url3} for article in articles3]
-    news_array4 = [{'title': sanitize_text(article['title']), 'description': sanitize_text(article['description']), 'url': url4} for article in articles4]
+    news_array4 = [
+        {'title': sanitize_text(article['title']), 'description': sanitize_text(article['description'] or ''),
+         'url': url4} for article in articles4]
     news_array5 = [{'title': sanitize_text(article['title']), 'url': url5} for article in articles5]
     news_array6 = [{'title': sanitize_text(article['title']), 'url': url6} for article in articles6]
 
@@ -80,7 +87,8 @@ def main():
     email_sender = EmailSender(
         from_email="karenalber11@gmail.com",
         password="ygwg oajl xwqu hfeo",
-        to_email="karenalber.work@gmail.com",
+        # to_email="karenalber.work@gmail.com",
+        to_email="Ssultan2055@gmail.com",
         smtp_server="smtp.gmail.com",
         port=587
     )
