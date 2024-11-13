@@ -91,11 +91,11 @@ def main():
     email_sender = EmailSender(
         from_email="karenalber11@gmail.com",
         password="ygwg oajl xwqu hfeo",
-        to_email="karenalber.work@gmail.com",
+        to_email="Ssultan2055@gmail.com",
         smtp_server="smtp.gmail.com",
         port=587
     )
-    # to_email="Ssultan2055@gmail.com",
+    # to_email="karenalber.work@gmail.com",
 
     subject = f"Daily Tech Startup News {today_date_subject}"
     email_sender.send_email(
