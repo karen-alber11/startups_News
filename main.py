@@ -14,9 +14,14 @@ import re
 # def sanitize_text(text):
 #     # Replace ellipsis with three dots
 #     return text.replace('…', '...')
+# Function to sanitize text by replacing problematic characters
 def sanitize_text(text):
+    # Return an empty string if the text is None
+    if text is None:
+        return ''
     # Replace special characters with simple ASCII characters
     return re.sub(r'[^\x00-\x7F]+', '', text)
+
 
 # Main Function to Orchestrate the Process
 def main():
