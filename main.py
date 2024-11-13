@@ -10,15 +10,16 @@ from Web5 import Web5
 from Web6 import Web6
 import re
 
-# Function to sanitize text by replacing problematic characters
-def sanitize_text(text):
-    # Replace ellipsis with three dots
-    return text.replace('…', '...')
+# # Function to sanitize text by replacing problematic characters
 # def sanitize_text(text):
-#     if text is None:
-#         return ''  # Return an empty string if text is None
-#     # Replace special characters with simple ASCII characters
-#     return re.sub(r'[^\x00-\x7F]+', '', text)
+#     # Replace ellipsis with three dots
+#     return text.replace('…', '...')
+def sanitize_text(text):
+    # Return an empty string if text is None
+    if not text:
+        return ''
+    # Replace special characters with simple ASCII characters
+    return re.sub(r'[^\x00-\x7F]+', '', text)
 
 
 # Main Function to Orchestrate the Process
@@ -71,6 +72,7 @@ def main():
     news_array5 = [{'title': sanitize_text(article.get('title', '')), 'url': url5} for article in articles5]
     news_array6 = [{'title': sanitize_text(article.get('title', '')), 'url': url6} for article in articles6]
 
+
     # Combine all articles
     combined_articles = news_array1 + news_array2 + news_array3 + news_array4 + news_array5 + news_array6
 
@@ -90,10 +92,10 @@ def main():
         from_email="karenalber11@gmail.com",
         password="ygwg oajl xwqu hfeo",
         to_email="karenalber.work@gmail.com",
-        # to_email="Ssultan2055@gmail.com",
         smtp_server="smtp.gmail.com",
         port=587
     )
+    # to_email="Ssultan2055@gmail.com",
 
     subject = f"Daily Tech Startup News {today_date_subject}"
     email_sender.send_email(
