@@ -10,15 +10,15 @@ from Web5 import Web5
 from Web6 import Web6
 import re
 
-# # Function to sanitize text by replacing problematic characters
-# def sanitize_text(text):
-#     # Replace ellipsis with three dots
-#     return text.replace('…', '...')
+# Function to sanitize text by replacing problematic characters
 def sanitize_text(text):
-    if text is None:
-        return ''  # Return an empty string if text is None
-    # Replace special characters with simple ASCII characters
-    return re.sub(r'[^\x00-\x7F]+', '', text)
+    # Replace ellipsis with three dots
+    return text.replace('…', '...')
+# def sanitize_text(text):
+#     if text is None:
+#         return ''  # Return an empty string if text is None
+#     # Replace special characters with simple ASCII characters
+#     return re.sub(r'[^\x00-\x7F]+', '', text)
 
 
 # Main Function to Orchestrate the Process
