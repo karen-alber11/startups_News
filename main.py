@@ -14,11 +14,9 @@ import re
 # def sanitize_text(text):
 #     # Replace ellipsis with three dots
 #     return text.replace('…', '...')
-# Function to sanitize text by replacing problematic characters
 def sanitize_text(text):
-    # Return an empty string if the text is None
     if text is None:
-        return ''
+        return ''  # Return an empty string if text is None
     # Replace special characters with simple ASCII characters
     return re.sub(r'[^\x00-\x7F]+', '', text)
 
@@ -60,19 +58,18 @@ def main():
     print(colored(f"URL6: {url6}", "blue"))
 
     # Prepare articles for each web source and sanitize the text
-    # Prepare articles for each web source and sanitize the text
     news_array1 = [
-        {'title': sanitize_text(article['title']), 'description': sanitize_text(article['description'] or ''),
+        {'title': sanitize_text(article.get('title', '')), 'description': sanitize_text(article.get('description', '')),
          'url': url1} for article in articles1]
     news_array2 = [
-        {'title': sanitize_text(article['title']), 'description': sanitize_text(article['description'] or ''),
+        {'title': sanitize_text(article.get('title', '')), 'description': sanitize_text(article.get('description', '')),
          'url': url2} for article in articles2]
-    news_array3 = [{'title': sanitize_text(article['title']), 'url': url3} for article in articles3]
+    news_array3 = [{'title': sanitize_text(article.get('title', '')), 'url': url3} for article in articles3]
     news_array4 = [
-        {'title': sanitize_text(article['title']), 'description': sanitize_text(article['description'] or ''),
+        {'title': sanitize_text(article.get('title', '')), 'description': sanitize_text(article.get('description', '')),
          'url': url4} for article in articles4]
-    news_array5 = [{'title': sanitize_text(article['title']), 'url': url5} for article in articles5]
-    news_array6 = [{'title': sanitize_text(article['title']), 'url': url6} for article in articles6]
+    news_array5 = [{'title': sanitize_text(article.get('title', '')), 'url': url5} for article in articles5]
+    news_array6 = [{'title': sanitize_text(article.get('title', '')), 'url': url6} for article in articles6]
 
     # Combine all articles
     combined_articles = news_array1 + news_array2 + news_array3 + news_array4 + news_array5 + news_array6
